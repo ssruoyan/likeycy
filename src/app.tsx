@@ -28,21 +28,26 @@ class App extends Component {
   config: Config = {
     tabBar: {
       custom: false,
+      color: '#0E254D',
+      selectedColor: '#5B62D2',
       list: [
         {
           pagePath: 'pages/index/index',
           text: '我的',
-          iconPath: ''
+          iconPath: 'images/me-icon.png',
+          selectedIconPath: 'images/me-icon-selected.png'
         },
         {
           pagePath: 'pages/rank/index',
           text: '榜单',
-          iconPath: ''
+          iconPath: 'images/rank-icon.png',
+          selectedIconPath: 'images/rank-icon-selected.png'
         },
         {
           pagePath: 'pages/activity/index',
           text: '盛典',
-          iconPath: ''
+          iconPath: 'images/act-icon.png',
+          selectedIconPath: 'images/act-icon-selected.png'
         }
       ]
     },

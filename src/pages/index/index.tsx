@@ -1,24 +1,10 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import { observer, inject } from '@tarojs/mobx'
+import { View, Image, Button } from '@tarojs/components'
+import { observer } from '@tarojs/mobx'
 
 import './index.less'
 
-type PageStateProps = {
-  counterStore: {
-    counter: number,
-    increment: Function,
-    decrement: Function,
-    incrementAsync: Function
-  }
-}
-
-interface Index {
-  props: PageStateProps;
-}
-
-@inject('counterStore')
 @observer
 class Index extends Component {
 
@@ -32,44 +18,24 @@ class Index extends Component {
   config: Config = {
     navigationBarTitleText: '首页'
   }
-
-  componentWillMount () { }
-
-  componentWillReact () {
-    console.log('componentWillReact')
+  click = () => {
+    Taro.showShareMenu({
+      withShareTicket: true
+    })
   }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  increment = () => {
-    const { counterStore } = this.props
-    counterStore.increment()
+  onShareAppMessage = () => {
+    return {
+      title: '与好友PK一下',
+      path: '/pages/index/index'
+    }
   }
-
-  decrement = () => {
-    const { counterStore } = this.props
-    counterStore.decrement()
-  }
-
-  incrementAsync = () => {
-    const { counterStore } = this.props
-    counterStore.incrementAsync()
-  }
-
   render () {
-    const { counterStore: { counter } } = this.props
     return (
       <View className='page__index'>
-        <Button onClick={this.increment}>+</Button>
-        <Button onClick={this.decrement}>-</Button>
-        <Button onClick={this.incrementAsync}>Add Async</Button>
-        <Text>{counter}</Text>
+        首页
+        <Button plain={true} openType="share" className="pk-button">
+          <Image className="pk-button-cover" src="https://image.ff2333.com/ycy/pk-button.png"/>
+        </Button>
       </View>
     )
   }
