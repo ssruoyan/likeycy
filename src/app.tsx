@@ -26,8 +26,31 @@ class App extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
+    tabBar: {
+      custom: false,
+      list: [
+        {
+          pagePath: 'pages/index/index',
+          text: '我的',
+          iconPath: ''
+        },
+        {
+          pagePath: 'pages/rank/index',
+          text: '榜单',
+          iconPath: ''
+        },
+        {
+          pagePath: 'pages/activity/index',
+          text: '盛典',
+          iconPath: ''
+        }
+      ]
+    },
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/bind/index',
+      'pages/rank/index',
+      'pages/activity/index'
     ],
     window: {
       backgroundTextStyle: 'light',

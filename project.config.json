@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "likecyc",
   "description": "A mini-program for cyc contest based tarojs",
-  "appid": "touristappid",
+  "appid": "wxf59c343b74838c15",
   "setting": {
     "urlCheck": true,
     "es6": false,
