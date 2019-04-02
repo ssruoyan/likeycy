@@ -1,0 +1,52 @@
+@import '../../theme.less';
+
+.rank-cell {
+    display: flex;
+    align-items: center;
+
+    &.golden .rank-index {
+        color: #FE6895;
+    }
+    .rank-index {
+        width: 34px;
+        text-align: center;
+        font-size: 56px;
+        margin-right: 42px;
+        color: #585364;
+    }
+    .rank-data {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 560px;
+        padding: 40px 0px;
+        border-bottom: solid 4px #F8F7FC;
+    }
+    .rank-user {
+        display: flex;
+        align-items: center;
+    }
+    .rank-usernick {
+        font-size: @text--h4;
+    }
+    .rank-score {
+        display: flex;
+        align-items: center;
+    }
+    .rank-avatar {
+        width: 84px;
+        height: 84px;
+        border-radius: 84px;
+        margin-right: 20px;
+    }
+    .rank-count {
+        font-size: @text--h4;
+        color: @color--primary;
+        font-weight: bold;
+    }
+    .rank-flower {
+        width: 68px;
+        height: 68px;
+    }
+    
+}

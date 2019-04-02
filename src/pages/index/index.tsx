@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Image, Button } from '@tarojs/components'
+import { View, Image, Text, Button } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 
 import './index.less'
@@ -16,7 +16,8 @@ class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '首页',
+    navigationBarBackgroundColor: '#282B48'
   }
   click = () => {
     Taro.showShareMenu({
@@ -32,10 +33,21 @@ class Index extends Component {
   render () {
     return (
       <View className='page__index'>
-        首页
-        <Button plain={true} openType="share" className="pk-button">
-          <Image className="pk-button-cover" src="https://image.ff2333.com/ycy/pk-button.png"/>
-        </Button>
+        <View className="main">
+        </View>
+        <View className="foot">
+          <View className="fixed-nav">
+            <Text className="nav-text actived">综合</Text>
+            <Text className="nav-text">微博</Text>
+            <Text className="nav-text">贴吧</Text>
+            <Text className="nav-text">虎扑</Text>
+            <Text className="nav-text">豆瓣</Text>
+            <Text className="nav-text">知乎</Text>
+          </View>
+          <Button plain={true} openType="share" className="pk-button">
+            <Image className="pk-button-cover" src="https://image.ff2333.com/ycy/pk-button.png"/>
+          </Button>
+        </View>
       </View>
     )
   }

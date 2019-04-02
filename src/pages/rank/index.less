@@ -1,0 +1,59 @@
+@import '../../theme.less';
+
+.page__rank {
+    .head {
+        position: fixed;
+        top: 0;
+        width: 750px;
+        height: 314px;
+        background: #FFFFFF;
+        z-index: 99;
+        .my-rank {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 686px;
+            height: 140px;
+            padding: 0px 36px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            background: #F3F4FA;
+            border-radius: 26px;
+            font-size: @text--h4;
+
+            .left {
+                display: flex;
+                align-items: center;
+            }
+            .right {
+                display: flex;
+                align-items: center;
+            }
+
+            &-index {
+                font-size: @text--h4;
+            }
+            &-count {
+                font-size: @text--h4;
+                color: @color--primary;
+                font-weight: bold;
+            }
+            &-flower {
+                width: 68px;
+                height: 68px;
+            }
+            &-avatar {
+                width: 84px;
+                height: 84px;
+                border-radius: 84px;
+                border-image: -webkit-linear-gradient( red , blue) 30 30;
+            }
+        }
+    }
+
+    .rank-list {
+        padding-top: 314px;
+        padding-left: 60px;
+        padding-right: 40px;
+    }
+}

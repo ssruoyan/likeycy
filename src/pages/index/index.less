@@ -1,4 +1,44 @@
+@import '../../theme.less';
+
 .page__index {
+    background-color: @color--dark;
+    .main {
+        height: 678px;
+        background-color: @color--dark;
+    }
+    .foot {
+        position: relative;
+        padding: 104px 0 52px;
+        background-color: @color--white;
+
+        .fixed-nav {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 686px;
+            height: 140px;
+            padding: 0px 64px;
+            box-sizing: border-box;
+            top: -70px;
+            left: 50%;
+            margin-left: -343px;
+            border-radius: 26px;
+            z-index: 10;
+            background-color: @color--white;
+            box-shadow: 0 10px 20px 0 rgba(183, 183, 183,0.12);
+
+            .nav-text {
+                font-size: @text--h4;
+                color: @color--main;
+                font-weight: bold;
+
+                &.actived {
+                    color: @color--primary;
+                }
+            }
+        }
+    }
     .pk-button {
         background: transparent;
         border: 0;
