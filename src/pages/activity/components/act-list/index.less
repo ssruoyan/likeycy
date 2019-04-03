@@ -1,19 +1,112 @@
 .ycy-act-list {
+    background: #100538;
     .act-list-shift {
         white-space: nowrap;
+        margin-bottom: 100px;
     }
     .act-event {
         display: inline-block;
+        vertical-align: middle;
+        margin-right: 30px;
+        opacity: 0.5;
+
+        &:first-child {
+            margin-left: 40px;
+        }
+
+        &.unlocked {
+            opacity: 1;
+            .act-event-card {
+                width: 276px;
+                height: 210px;
+                border-radius: 32px;
+                .lock {
+                    position: absolute;
+                    width: 68px;
+                    height: 94px;
+                    bottom: 0;
+                    left: 50%;
+                    margin-left: -138px;
+                }
+                .title {
+                    font-size: 40px;
+                    font-weight: bold;
+                    color: #FFFFFF;
+                }
+            }
+            .act-event-desc {
+                display: none;
+            }
+        }
+
     }
     .act-event-card {
-        width: 400px;
-        height: 200px;
-        border-radius: 12px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 238px;
+        height: 152px;
+        border-radius: 32px;
+        background: linear-gradient(to bottom right, #A980C3, #646AB1);
+        box-shadow: 0 18px 24px 0 rgba(0, 0, 0, 0.9);
+        overflow: hidden;
         .title {
+            font-size: 36px;
             color: #FFFFFF;
         }
         .lock {
-            width: 30px;
+            position: absolute;
+            width: 32px;
+            height: 40px;
+            bottom: 0;
+            left: 50%;
+            margin-left: -16px;
+        }
+    }
+    .act-event-desc {
+        display: block;
+        margin-top: 30px;
+        text-align: center;
+        font-size: 26px;
+        color: #646AB1;
+    }
+
+    .act-list-show {
+        overflow: hidden;
+    }
+
+    .act-show {
+        position: relative;
+        width: 670px;
+        height: 240px;
+        margin: 0 auto 40px;
+        border-radius: 26px;
+        background: fade(#FFFFFF, 10);
+        border: solid 1px #646AB1;
+        padding: 48px 60px;
+        box-sizing: border-box;
+        .act-show-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .act-show-title {
+            font-size: 28px;
+            color: fade(#FFFFFF, 50);
+            margin-bottom: 8px;
+        }
+        .act-show-icon {
+            position: absolute;
+            top: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+        }
+        .act-show-text {
+            font-size: 32px;
+            color: #FFFFFF;
+            line-height: 44px;
         }
     }
 }

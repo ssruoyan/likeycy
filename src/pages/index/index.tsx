@@ -2,6 +2,7 @@ import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Image, Text, Button } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
+import IndexGraph from './IndexGraph'
 
 import './index.less'
 
@@ -16,8 +17,9 @@ class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
-    navigationBarTitleText: '首页',
-    navigationBarBackgroundColor: '#282B48'
+    navigationBarTitleText: '超越吧！村村',
+    navigationBarBackgroundColor: '#282B48',
+    navigationBarTextStyle: 'white'
   }
   click = () => {
     Taro.showShareMenu({
@@ -34,6 +36,10 @@ class Index extends Component {
     return (
       <View className='page__index'>
         <View className="main">
+          <Text className="count">731</Text>
+          <Text className="rate">今日吸花指数+3%</Text>
+          <Text className="rank">排名1013位</Text>
+          <IndexGraph />
         </View>
         <View className="foot">
           <View className="fixed-nav">

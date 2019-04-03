@@ -78,7 +78,7 @@ class Rank extends Component {
             </View>
         </View>
         <View className="main">
-            <ScrollView scrollY={true} className="rank-list">
+            <ScrollView scrollY className="rank-list">
             {
               ranks.map((rank: any, idx) => {
                 return <RankCell rank={idx + 1} avatar={rank.avatar} userNick={rank.username} count={rank.score - idx} />

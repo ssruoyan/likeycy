@@ -10,6 +10,7 @@ class Activity extends Component {
   config: Config = {
     navigationBarTitleText: '盛典',
     navigationBarBackgroundColor: '#100538',
+    backgroundColor: '#100538',
     navigationBarTextStyle: 'white',
   }
   state = {

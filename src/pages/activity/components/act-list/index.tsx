@@ -61,12 +61,13 @@ class ActList extends Component {
                     (activeEvent.list || []).map((info) => {
                         return (
                             <View className="act-show">
-                                <View>
-                                    <Text>{info.title}</Text>
+                                <View className="act-show-head">
+                                    <Text className="act-show-title">{info.title}</Text>
                                 </View>
                                 <View>
-                                    <Text>{info.content}</Text>
+                                    <Text className="act-show-text">{info.content}</Text>
                                 </View>
+                                <Image className="act-show-icon" src="https://image.ff2333.com/ycy/more.png" />
                             </View>
                         )
                     })
