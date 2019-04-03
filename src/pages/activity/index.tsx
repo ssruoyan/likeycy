@@ -1,8 +1,8 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, Image, ScrollView } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
-
+import ActList from './components/act-list'
 import './index.less'
 
 @observer
@@ -12,7 +12,43 @@ class Activity extends Component {
     navigationBarBackgroundColor: '#100538',
     navigationBarTextStyle: 'white',
   }
+  state = {
+    list: [
+      {
+        title: '奖品与榜单',
+        locked: false,
+        desc: '已经开始',
+        list: [
+          {
+            title: '感谢念慈菴赞助',
+            content: '京都念慈菴\n您的最佳选择'
+          },
+          {
+            title: '感谢念慈菴赞助',
+            content: '京都念慈菴\n您的最佳选择'
+          }
+        ]
+      },
+      {
+        title: '盛典事情',
+        locked: true,
+        desc: '还未开始呢'
+      },
+      {
+        title: '盛典事情',
+        locked: true,
+        desc: '还未开始呢'
+      },
+      {
+        title: '盛典事情',
+        locked: true,
+        desc: '还未开始呢'
+      }
+    ]
+  }
   render () {
+    const { list } = this.state
+
     return (
       <View className='page__activity'>
         <View className="act-title">
@@ -36,24 +72,7 @@ class Activity extends Component {
           </View>
         </View>
         <Image src="https://image.ff2333.com/ycy/arrow-down.png" className="act-arrow"/>
-        <ScrollView scrollX>
-          <View className="act-event unlocked">
-            <View className="act-event-card">
-              <Text>榜单与奖品</Text>
-              <Image src="https://image.ff2333.com/ycy/unlock.png"/>
-            </View>
-          </View>
-          <View className="act-event locked">
-            <View className="act-event-card">
-              <Text>榜单与奖品</Text>
-              <Image src="https://image.ff2333.com/ycy/lock.png"/>
-            </View>
-            <Text className="act-event-tips"></Text>
-          </View>
-          <View className="act-event locked"></View>
-          <View className="act-event locked"></View>
-          <View className="act-event locked"></View>
-        </ScrollView>
+        <ActList actived={0} list={list}></ActList>
       </View>
     )
   }

@@ -1,58 +1,80 @@
-import { ComponentType } from 'react'
 import Taro, { Component } from '@tarojs/taro'
 import { View, ScrollView, Text, Image } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
+import cx from 'classnames'
 
+import './index.less'
 
-interface ActEventInfo {
+type ActEventInfo = {
     title: string;
-    link: string;
-    desc: string;
+    link?: string;
+    content: string;
 }
-interface ActEvent {
+type ActEvent = {
     title: string;
     locked: boolean;
-    description: string;
-    list: ActEventInfo[]
+    desc: string;
+    list?: ActEventInfo[]
 }
 interface ActList {
     props: {
-        actived: boolean,
+        actived: number,
         list: ActEvent[]
     }
 }
 
 @observer
 class ActList extends Component {
-    state = {
-        
+    constructor(...props) {
+        super(...props)
     }
     render() {
         const { actived, list } = this.props
+        const activeEvent = actived >= 0 ? list[actived] : list[0]
 
-        
         return (
             <View className="ycy-act-list">
                 <ScrollView scrollX className="act-list-shift">
                 {
-                    list.map((evt, idx) => {
+                    list.map((evt) => {
+                        const cls = cx({
+                            'act-event': true,
+                            unlocked: !evt.locked,
+                            locked: evt.locked
+                        })
+                        const icon = evt.locked ? 'https://image.ff2333.com/ycy/lock.png' : 'https://image.ff2333.com/ycy/unlock.png'
+
                         return (
-                            <View className="act-event unlocked">
+                            <View className={cls}>
                                 <View className="act-event-card">
-                                <Text>榜单与奖品</Text>
-                                <Image src="https://image.ff2333.com/ycy/unlock.png"/>
+                                    <Text className="title">榜单与奖品</Text>
+                                    <Image className="lock" src={icon} />
                                 </View>
+                                <Text className="act-event-desc">{evt.desc}</Text>
                             </View>
                         )
                     })
                 } 
                 </ScrollView>
                 <View className="act-list-show">
-                    
+                {
+                    (activeEvent.list || []).map((info) => {
+                        return (
+                            <View className="act-show">
+                                <View>
+                                    <Text>{info.title}</Text>
+                                </View>
+                                <View>
+                                    <Text>{info.content}</Text>
+                                </View>
+                            </View>
+                        )
+                    })
+                }
                 </View>
             </View>
         )
     }
 }
 
-export default ActList as ComponentType
+export default ActList
