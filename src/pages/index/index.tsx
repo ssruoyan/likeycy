@@ -2,7 +2,9 @@ import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Image, Text, Button } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
-import IndexGraph from './IndexGraph'
+import { getUserInfo } from '../../api/index'
+import IndexGraph from './index-graph/index'
+import CountUp from './count-up/index'
 
 import './index.less'
 
@@ -21,24 +23,48 @@ class Index extends Component {
     navigationBarBackgroundColor: '#282B48',
     navigationBarTextStyle: 'white'
   }
-  click = () => {
+  state = {
+    percent: '7%',
+    rank: 2,
+    score: 20,
+    scoreDetail: []
+  }
+  componentDidMount() {
     Taro.showShareMenu({
       withShareTicket: true
     })
   }
+  componentDidShow() {
+    const accessToken = Taro.getStorageSync('accessToken')
+
+    getUserInfo(accessToken).then(({ data }) => {
+      const { percent, scoreDetail, score, rank } = data.data
+
+      this.setState({
+        percent,
+        scoreDetail,
+        score,
+        rank
+      })
+    })
+  }
+  click = () => {
+  }
   onShareAppMessage = () => {
     return {
       title: '与好友PK一下',
-      path: '/pages/index/index'
+      path: '/pages/rank/index'
     }
   }
   render () {
+    const { percent, rank, score } = this.state
+
     return (
       <View className='page__index'>
         <View className="main">
-          <Text className="count">731</Text>
-          <Text className="rate">今日吸花指数+3%</Text>
-          <Text className="rank">排名1013位</Text>
+          <CountUp num={score}></CountUp>
+          <Text className="rate">今日吸花指数{percent}</Text>
+          <Text className="rank">排名{rank}位</Text>
           <IndexGraph />
         </View>
         <View className="foot">

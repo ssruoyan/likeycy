@@ -8,6 +8,26 @@
         height: 314px;
         background: #FFFFFF;
         z-index: 99;
+        .head-select {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 52px 50px 40px;
+        }
+        .select {
+            display: flex;
+            align-items: center;
+            .select-text {
+                font-size: 48px;
+                color: @color--dark;
+                margin-right: 16px;
+            }
+            .select-icon {
+                width: 24px;
+                height: 14px;
+            }
+        }
+
         .my-rank {
             display: flex;
             align-items: center;
@@ -32,6 +52,7 @@
 
             &-index {
                 font-size: @text--h4;
+                font-family: Avenir;
             }
             &-count {
                 font-size: @text--h4;
@@ -45,8 +66,20 @@
             &-avatar {
                 width: 84px;
                 height: 84px;
+                margin: 0 20px;
                 border-radius: 84px;
-                border-image: -webkit-linear-gradient( red , blue) 30 30;
+                overflow: hidden;
+                background: url('https://image.ff2333.com/ycy/avatar-frame.png');
+                background-size: cover;
+                background-position: center;
+                padding: 8px;
+                box-sizing: border-box;
+                .avatar-cover {
+                    display: block;
+                    width: 68px;
+                    height: 68px;
+                    border-radius: 84px;
+                }
             }
         }
     }
@@ -55,5 +88,7 @@
         padding-top: 314px;
         padding-left: 60px;
         padding-right: 40px;
+        box-sizing: border-box;
+        overflow: hidden;
     }
 }

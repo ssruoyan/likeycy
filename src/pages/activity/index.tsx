@@ -21,29 +21,29 @@ class Activity extends Component {
         desc: '已经开始',
         list: [
           {
-            title: '感谢念慈菴赞助',
-            content: '京都念慈菴\n您的最佳选择'
+            title: '感谢赞助商',
+            content: '京都念慈菴\n我是糖，但不是一般的糖'
           },
           {
-            title: '感谢念慈菴赞助',
-            content: '京都念慈菴\n您的最佳选择'
+            title: '感谢赞助商',
+            content: 'CCYY小透明粉丝\n杨超越签名照，海报等等'
           }
         ]
       },
       {
-        title: '盛典事情',
+        title: '盛典事宜',
         locked: true,
-        desc: '还未开始呢'
+        desc: '20190701揭晓'
       },
       {
-        title: '盛典事情',
+        title: '盛典事宜',
         locked: true,
-        desc: '还未开始呢'
+        desc: '20190801揭晓'
       },
       {
-        title: '盛典事情',
+        title: '盛典事宜',
         locked: true,
-        desc: '还未开始呢'
+        desc: '20190822揭晓'
       }
     ]
   }

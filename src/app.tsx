@@ -56,7 +56,8 @@ class App extends Component {
       'pages/bind/index',
       'pages/rank/index',
       'pages/activity/index',
-      'pages/login/index'
+      'pages/login/index',
+      "pages/rank-rule/index"
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -65,7 +66,17 @@ class App extends Component {
       navigationBarTextStyle: 'black'
     }
   }
-  componentDidShow () {}
+  componentDidMount() {
+    const accessToken = Taro.getStorageSync('accessToken')
+
+    if (!accessToken) {
+      Taro.navigateTo({
+        url: '/pages/login/index'
+      })
+    }
+  }
+  componentDidShow () {
+  }
 
   componentDidHide () {}
 

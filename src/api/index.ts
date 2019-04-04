@@ -10,10 +10,11 @@ const DOMAIN = 'http://192.168.31.189:8080'
 export function userLogin(code) {
     return Taro.request({
         url: DOMAIN + '/user/login',
-        method: 'POST',
+        method: 'GET',
         data: {
             code,
-        }
+        },
+        dataType: 'json'
     })
 }
 
@@ -27,8 +28,9 @@ export function userLogin(code) {
 export function saveUserInfo(data) {
     return Taro.request({
         url: DOMAIN + '/user/save',
-        method: 'POST',
+        method: 'GET',
         data,
+        dataType: 'json'
     })
 }
 
@@ -43,7 +45,8 @@ export function getUserInfo(accessToken) {
         method: 'GET',
         data: {
             accessToken,
-        }
+        },
+        dataType: 'json'
     })
 }
 
@@ -57,9 +60,10 @@ export function getUserInfo(accessToken) {
  */
 export function getTotalRank(data) {
     return Taro.request({
-        url: DOMAIN + '/user/rank',
+        url: DOMAIN + '/rank/total',
         method: 'GET',
         data,
+        dataType: 'json'
     })
 }
 
@@ -73,8 +77,9 @@ export function getTotalRank(data) {
  */
 export function getGroupRank(data) {
     return Taro.request({
-        url: DOMAIN + '/user/group/rank',
+        url: DOMAIN + '/rank/group',
         method: 'GET',
-        data
+        data,
+        dataType: 'json'
     })
 }

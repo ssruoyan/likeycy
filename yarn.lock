@@ -295,6 +295,13 @@
   dependencies:
     less "^3.0.4"
 
+"@tarojs/plugin-sass@^1.2.23":
+  version "1.2.23"
+  resolved "http://192.168.3.43/@tarojs%2fplugin-sass/-/plugin-sass-1.2.23.tgz#438305c3d7a92d55b6cec76527389b88ef15056a"
+  integrity sha1-Q4MFw9epLVW2zsdlJzibiO8VBWo=
+  dependencies:
+    dart-sass "^1.17.4"
+
 "@tarojs/plugin-uglifyjs@1.2.21":
   version "1.2.21"
   resolved "http://registry.npm.taobao.org/@tarojs/plugin-uglifyjs/download/@tarojs/plugin-uglifyjs-1.2.21.tgz#c24d408dd5f3310993db94e89ccf58774b6d5f30"
@@ -2684,6 +2691,13 @@ d@1:
   integrity sha1-dUu1v+VUUdpppYuU1F9MWwRi1Y8=
   dependencies:
     es5-ext "^0.10.9"
+
+dart-sass@^1.17.4:
+  version "1.17.4"
+  resolved "http://192.168.3.43/dart-sass/-/dart-sass-1.17.4.tgz#9d03b3944977b504144f1d3df40287595ba45a3a"
+  integrity sha1-nQOzlEl3tQQUTx099AKHWVukWjo=
+  dependencies:
+    chokidar "^2.0.0"
 
 dashdash@^1.12.0:
   version "1.14.1"
