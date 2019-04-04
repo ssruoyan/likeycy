@@ -1,69 +1,38 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text, Image, ScrollView } from '@tarojs/components'
-import { observer } from '@tarojs/mobx'
+import { observer, inject } from '@tarojs/mobx'
 import RankCell from '../../components/rank-cell'
 
 import './index.less'
 
+interface Rank {
+  props: {
+    rankStore: any
+  }
+}
+@inject('rankStore')
 @observer
 class Rank extends Component {
   config: Config = {
     navigationBarTitleText: '排行'
   }
-  state = {
-    self: null,
-    ranks: [
-      {
-        username: '我是个萨比',
-        avatar: 'https://image.ff2333.com/ycy/mock-avatar.png',
-        score: 999,
-      },
-      {
-        username: '我是个萨比',
-        avatar: 'https://image.ff2333.com/ycy/mock-avatar.png',
-        score: 999,
-      },
-      {
-        username: '我是个萨比',
-        avatar: 'https://image.ff2333.com/ycy/mock-avatar.png',
-        score: 999,
-      },
-      {
-        username: '我是个萨比',
-        avatar: 'https://image.ff2333.com/ycy/mock-avatar.png',
-        score: 999,
-      },
-      {
-        username: '我是个萨比',
-        avatar: 'https://image.ff2333.com/ycy/mock-avatar.png',
-        score: 999,
-      },
-      {
-        username: '我是个萨比',
-        avatar: 'https://image.ff2333.com/ycy/mock-avatar.png',
-        score: 999,
-      },
-      {
-        username: '我是个萨比',
-        avatar: 'https://image.ff2333.com/ycy/mock-avatar.png',
-        score: 999,
-      },
-      {
-        username: '我是个萨比',
-        avatar: 'https://image.ff2333.com/ycy/mock-avatar.png',
-        score: 999,
-      }
-    ]
-  }
   render () {
-    const { ranks } = this.state
+    const { rankStore } = this.props
+    const { ranks, self } = rankStore
 
     return (
       <View className='page__rank'>
         <View className="head">
             <View className="head-select">
-                
+                <View className="select">
+                  <Text className="select-text"></Text>
+                  <Image className="select-icon" src="https://image.ff2333.com/ycy/down.png" />
+                </View>
+                <View className="select">
+                  <Text className="select-text"></Text>
+                  <Image className="select-icon" src="https://image.ff2333.com/ycy/down.png" />
+                </View>
             </View>
             <View className="my-rank">
                 <View className="left">
@@ -80,8 +49,9 @@ class Rank extends Component {
         <View className="main">
             <ScrollView scrollY className="rank-list">
             {
-              ranks.map((rank: any, idx) => {
-                return <RankCell rank={idx + 1} avatar={rank.avatar} userNick={rank.username} count={rank.score - idx} />
+              (ranks || []).map((info, idx) => {
+                
+                return <RankCell key={idx} rank={idx + 1} avatar={info.avatar} userNick={info.username} count={info.score - idx} />
               })
             }
             </ScrollView>

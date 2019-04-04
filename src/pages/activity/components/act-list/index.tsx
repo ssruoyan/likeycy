@@ -30,7 +30,7 @@ class ActList extends Component {
     }
     render() {
         const { actived, list } = this.props
-        const activeEvent = actived >= 0 ? list[actived] : list[0]
+        const activeEvent = list[actived]
 
         return (
             <View className="ycy-act-list">
@@ -56,7 +56,7 @@ class ActList extends Component {
                     })
                 } 
                 </ScrollView>
-                <View className="act-list-show">
+                { activeEvent && <View className="act-list-show">
                 {
                     (activeEvent.list || []).map((info) => {
                         return (
@@ -72,7 +72,7 @@ class ActList extends Component {
                         )
                     })
                 }
-                </View>
+                </View>}
             </View>
         )
     }

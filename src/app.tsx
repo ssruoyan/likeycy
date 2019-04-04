@@ -2,7 +2,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/mobx'
 import Index from './pages/index'
 
-import counterStore from './store/counter'
+import rankStore from './store/rank'
 
 import './app.less'
 
@@ -11,10 +11,10 @@ import './app.less'
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
-
 const store = {
-  counterStore
+  rankStore,
 }
+
 
 class App extends Component {
 
@@ -65,17 +65,11 @@ class App extends Component {
       navigationBarTextStyle: 'black'
     }
   }
-
-  componentDidMount () {}
-
   componentDidShow () {}
 
   componentDidHide () {}
 
   componentDidCatchError () {}
-
-  // 在 App 类中的 render() 函数没有实际作用
-  // 请勿修改此函数
   render () {
     return (
       <Provider store={store}>

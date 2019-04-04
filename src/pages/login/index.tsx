@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Image, Text } from '@tarojs/components'
+import { View, Button } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 
 import './index.less'
@@ -10,10 +10,18 @@ class ThirdAccoundBind extends Component {
   config: Config = {
     navigationBarTitleText: '绑定账号'
   }
+  componentDidMount() {
+      Taro.login().then((data) => {
+          console.log(data)
+      })
+  }
+  getUserInfo = (data) => {
+      console.log(data)
+  }
   render () {
     return (
         <View className="page__login">
-            <Button openType="getUserInfo" className="auth-button">点击授权登录</Button>
+            <Button onGetUserInfo={this.getUserInfo} openType="getUserInfo" className="auth-button">点击授权登录</Button>
         </View>
     )
   }
