@@ -1,22 +1,50 @@
 import Taro, { Component } from '@tarojs/taro'
 import { Text } from '@tarojs/components'
-
-import './index.less'
+import $wuxCountUp from './countup.js'
 
 interface CountUp {
     props: {
-        num: number
+        num: number | string,
+        className?: string
     }
 }
 class CountUp extends Component {
+    state = {
+        c1: 0
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.num !== this.props.num) {
+            const c2 = new $wuxCountUp(this.props.num, nextProps.num, 0, 1, {
+                printValue: (value) => {
+                    this.setState({
+                        c1: value
+                    })
+                },
+                separator: ''
+            })
 
+            c2.start()
+        }
+    }
     componentDidMount() {
-        console.log(this.props)
+        const num = this.props.num
+
+        const c1 = new $wuxCountUp(0, num, 0, 1, {
+            printValue: (value) => {
+                this.setState({
+                    c1: value
+                })
+            },
+            separator: ''
+        })
+        
+        c1.start()
     }
     render() {
-        const { num } = this.props
+        const { c1 } = this.state
+        const { className } = this.props
 
-        return <Text className="count-up">{num}</Text>   
+        return <Text className={className}>{c1}</Text>   
     }
 }
 

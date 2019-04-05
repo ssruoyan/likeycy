@@ -14,6 +14,7 @@ type ActEvent = {
     title: string;
     locked: boolean;
     desc: string;
+    link?: string;
     list?: ActEventInfo[]
 }
 interface ActList {
@@ -25,8 +26,17 @@ interface ActList {
 
 @observer
 class ActList extends Component {
+    static defaultProps = {
+        list: [],
+        actived: 0
+    }
     constructor(...props) {
         super(...props)
+    }
+    link = (target) => {
+        target && Taro.navigateTo({
+            url: target
+        })
     }
     render() {
         const { actived, list } = this.props
@@ -45,9 +55,9 @@ class ActList extends Component {
                         const icon = evt.locked ? 'https://image.ff2333.com/ycy/lock.png' : 'https://image.ff2333.com/ycy/unlock.png'
 
                         return (
-                            <View className={cls}>
+                            <View className={cls} onClick={this.link.bind(this, evt.link)}>
                                 <View className="act-event-card">
-                                    <Text className="title">榜单与奖品</Text>
+                                    <Text className="title">{evt.title}</Text>
                                     <Image className="lock" src={icon} />
                                 </View>
                                 <Text className="act-event-desc">{evt.desc}</Text>
@@ -60,7 +70,7 @@ class ActList extends Component {
                 {
                     (activeEvent.list || []).map((info) => {
                         return (
-                            <View className="act-show">
+                            <View className="act-show" onClick={this.link.bind(this, info.link)}>
                                 <View className="act-show-head">
                                     <Text className="act-show-title">{info.title}</Text>
                                 </View>

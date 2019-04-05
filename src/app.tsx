@@ -57,7 +57,9 @@ class App extends Component {
       'pages/rank/index',
       'pages/activity/index',
       'pages/login/index',
-      "pages/rank-rule/index"
+      "pages/rank-rule/index",
+      "pages/bind-input/index",
+      "pages/webview/index"
     ],
     window: {
       backgroundTextStyle: 'light',

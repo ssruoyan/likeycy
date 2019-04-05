@@ -10,7 +10,6 @@ declare module "*.less";
 declare module "*.scss";
 declare module "*.sass";
 declare module "*.styl";
-
 declare global {
   namespace JSX {
       interface IntrinsicElements {

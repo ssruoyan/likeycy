@@ -27,8 +27,6 @@ class Rank extends Component {
       withShareTicket: true
     })
 
-    console.log(this.$router)
-
     rankStore.getRankList()
   }
   openRankSelection = () => {

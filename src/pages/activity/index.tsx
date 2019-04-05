@@ -19,13 +19,16 @@ class Activity extends Component {
         title: '奖品与榜单',
         locked: false,
         desc: '已经开始',
+        link: '/pages/rank-rule/index',
         list: [
           {
             title: '感谢赞助商',
+            link: '/pages/rank-rule/index',
             content: '京都念慈菴\n我是糖，但不是一般的糖'
           },
           {
             title: '感谢赞助商',
+            link: '/pages/rank-rule/index',
             content: 'CCYY小透明粉丝\n杨超越签名照，海报等等'
           }
         ]

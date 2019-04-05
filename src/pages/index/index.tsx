@@ -1,10 +1,11 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Image, Text, Button } from '@tarojs/components'
+import { View, Image, Text, CoverView, Button, CoverImage } from '@tarojs/components'
 import { observer } from '@tarojs/mobx'
 import { getUserInfo } from '../../api/index'
 import IndexGraph from './index-graph/index'
 import CountUp from './count-up/index'
+import FixedNavCover from '../../images/nav.png'
 
 import './index.less'
 
@@ -21,17 +22,22 @@ class Index extends Component {
   config: Config = {
     navigationBarTitleText: '超越吧！村村',
     navigationBarBackgroundColor: '#282B48',
+    backgroundColor: '#282B48',
     navigationBarTextStyle: 'white'
   }
   state = {
-    percent: '7%',
+    percent: 7,
     rank: 2,
     score: 20,
-    scoreDetail: []
+    scoreDetail: [],
+    showNav: false,
   }
   componentDidMount() {
     Taro.showShareMenu({
       withShareTicket: true
+    })
+    this.setState({
+      showNav: true
     })
   }
   componentDidShow() {
@@ -53,29 +59,39 @@ class Index extends Component {
   onShareAppMessage = () => {
     return {
       title: '与好友PK一下',
-      path: '/pages/rank/index'
+      path: '/pages/rank/index?groupId=999'
     }
   }
   render () {
-    const { percent, rank, score } = this.state
+    const { percent, rank, score, showNav } = this.state
 
     return (
       <View className='page__index'>
         <View className="main">
-          <CountUp num={score}></CountUp>
-          <Text className="rate">今日吸花指数{percent}</Text>
+          <View className="count-up-score">
+            <CountUp num={score}></CountUp>
+          </View>
+          <View className="rate">
+            <Text>今日吸花指数</Text>
+            <CountUp className="count-up-percent" num={percent}></CountUp>
+            <Text>%</Text>
+          </View>
           <Text className="rank">排名{rank}位</Text>
           <IndexGraph />
         </View>
         <View className="foot">
-          <View className="fixed-nav">
-            <Text className="nav-text actived">综合</Text>
-            <Text className="nav-text">微博</Text>
-            <Text className="nav-text">贴吧</Text>
-            <Text className="nav-text">虎扑</Text>
-            <Text className="nav-text">豆瓣</Text>
-            <Text className="nav-text">知乎</Text>
-          </View>
+          { showNav && <CoverView className="fixed-nav">
+            <CoverImage src={FixedNavCover} className="fixed-nav-bg" />
+            <CoverView className="fixed-nav-content">
+              <CoverView className="nav-text actived">综合</CoverView>
+              <CoverView className="nav-text">微博</CoverView>
+              <CoverView className="nav-text">贴吧</CoverView>
+              <CoverView className="nav-text">虎扑</CoverView>
+              <CoverView className="nav-text">豆瓣</CoverView>
+              <CoverView className="nav-text">知乎</CoverView>
+            </CoverView>
+            
+          </CoverView> }
           <Button plain={true} openType="share" className="pk-button">
             <Image className="pk-button-cover" src="https://image.ff2333.com/ycy/pk-button.png"/>
           </Button>
