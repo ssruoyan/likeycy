@@ -3,18 +3,25 @@ import { View } from "@tarojs/components";
 import F2 from "@antv/wx-f2";
 
 import "./index.less";
+
+interface IndexGraph {
+  props: {
+    data: any[]
+  }
+}
+
 class IndexGraph extends Component {
   chart: any;
+  constructor(...props) {
+    super(...props)
+  }
   initChart = (canvas, width, height) => {
-    const data = [
-      { score: 300, day: 1 },
-      { score: 700, day: 2 },
-      { score: 400, day: 3 },
-      { score: 360, day: 4 },
-      { score: 510, day: 5 },
-      { score: 900, day: 6 },
-      { score: 280, day: 7 }
-    ];
+    const data = [0, 0, 0, 0, 0, 0, 0].map((score, idx) => {
+      return {  
+        score,
+        day: idx + 1
+      }
+    })
     const chart = new F2.Chart({
       el: canvas,
       width,
@@ -24,7 +31,7 @@ class IndexGraph extends Component {
 
     chart.scale({
         day: {
-            range: [0, 0.88]
+            range: [0, 0.92]
         },
         score: {
             range: [0, 1]
@@ -94,8 +101,6 @@ class IndexGraph extends Component {
 
     chart.showTooltip(point);
 
-    this.chart = chart;
-
     return chart;
   };
   state = {
@@ -108,6 +113,29 @@ class IndexGraph extends Component {
       "ff-canvas": "../../../components/f2-canvas/f2-canvas"
     }
   };
+  componentDidMount() {
+    const ref = this.$scope.selectComponent('#canvas')
+
+    setTimeout(() => {
+      ref.chart.changeData(this.props.data.map((score, idx) => {
+        return {  
+          score,
+          day: idx + 1
+        }
+      }))
+    }, 100)
+  }
+  componentWillReceiveProps(nextProps) {
+    const ref = this.$scope.selectComponent('#canvas')
+    setTimeout(() => {
+      ref.chart.changeData(nextProps.data.map((score, idx) => {
+        return {  
+          score,
+          day: idx + 1
+        }
+      }))
+    }, 100)
+  }
   render() {
     const { opts } = this.state;
 

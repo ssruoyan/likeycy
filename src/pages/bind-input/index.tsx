@@ -4,6 +4,7 @@ import { View, Input, Text } from '@tarojs/components'
 import { AtMessage, AtButton } from 'taro-ui'
 import { observer } from '@tarojs/mobx'
 import { PLATFORM_TYPE_NAME } from '../../const/index'
+import { saveAuthPlatform } from '../../utils/index'
 
 import 'taro-ui/dist/style/components/message.scss'
 import 'taro-ui/dist/style/components/button.scss'
@@ -27,8 +28,15 @@ class ThirdAccoundInput extends Component {
         message: '绑定成功',
         type: 'success'
       })
+
+      saveAuthPlatform(this.$router.params.id)
+
       this.setState({
         loading: false
+      }, () => {
+        Taro.switchTab({
+          url: '/pages/index/index'
+        })
       })
     }, 500)
   }

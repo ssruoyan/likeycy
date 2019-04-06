@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 
-const DOMAIN = 'http://192.168.31.189:8080'
+const DOMAIN = 'http://192.168.43.125:8080'
 
 /**
  * 登录
@@ -37,15 +37,14 @@ export function saveUserInfo(data) {
 /**
  * 查询用户信息
  * 
- * @param { string } accessToken
+ * @param { string } data.accessToken
+ * @param { number } data.platformType
  */
-export function getUserInfo(accessToken) {
+export function getUserInfo(data) {
     return Taro.request({
         url: DOMAIN + '/user/userinfo',
         method: 'GET',
-        data: {
-            accessToken,
-        },
+        data,
         dataType: 'json'
     })
 }

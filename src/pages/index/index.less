@@ -71,10 +71,12 @@
 
             .nav-text {
                 font-size: @text--h4;
-                color: @color--main;
+                color: #d8d8d8;
                 font-weight: bold;
-
-                &.actived {
+                &.authed {
+                    color: @color--main;
+                }
+                &.authed.actived {
                     color: @color--primary;
                 }
             }

@@ -1,15 +1,32 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
+import cx from 'classnames'
 import { View, Image, Text, CoverView, Button, CoverImage } from '@tarojs/components'
-import { observer } from '@tarojs/mobx'
+import { AtMessage } from 'taro-ui';
 import { getUserInfo } from '../../api/index'
 import IndexGraph from './index-graph/index'
 import CountUp from './count-up/index'
 import FixedNavCover from '../../images/nav.png'
+import { getAuthPlatform } from '../../utils/index'
+import { PLATFORM_TYPE, PLATFORM_TYPE_NAME } from '../../const/index'
 
+
+import 'taro-ui/dist/style/components/message.scss'
 import './index.less'
 
-@observer
+
+const NAV_ITEMS = [{
+  id: 0,
+  name: '综合'
+}].concat(Object.keys(PLATFORM_TYPE).map((key) => {
+  const id = PLATFORM_TYPE[key]
+  const name = PLATFORM_TYPE_NAME[id]
+  return {
+    id,
+    name,
+  }
+}))
+
 class Index extends Component {
 
   /**
@@ -19,6 +36,7 @@ class Index extends Component {
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
+  navItems: any[] = NAV_ITEMS
   config: Config = {
     navigationBarTitleText: '超越吧！村村',
     navigationBarBackgroundColor: '#282B48',
@@ -26,24 +44,46 @@ class Index extends Component {
     navigationBarTextStyle: 'white'
   }
   state = {
-    percent: 7,
-    rank: 2,
-    score: 20,
-    scoreDetail: [],
+    percent: 0,
+    rank: 0,
+    score: 0,
+    scoreDetail: [0, 0, 0, 0, 0, 0, 0],
     showNav: false,
+    authPlatforms: [],
+    activeKey: 0
   }
-  componentDidMount() {
+  componentDidMount() {    
     Taro.showShareMenu({
       withShareTicket: true
     })
-    this.setState({
-      showNav: true
-    })
-  }
-  componentDidShow() {
     const accessToken = Taro.getStorageSync('accessToken')
 
-    getUserInfo(accessToken).then(({ data }) => {
+    if (!accessToken) {
+      Taro.redirectTo({
+        url: '/pages/bind/index',
+        success() {
+          console.log('succss')
+        }
+      })
+    }
+  }
+  componentDidShow() {
+    const platforms: number[] = getAuthPlatform()
+
+    this.fetch()
+
+    this.setState({
+      authPlatforms: platforms,
+      showNav: true,
+    })
+  }
+  fetch() {
+    const accessToken = Taro.getStorageSync('accessToken')
+    const { activeKey } = this.state
+
+    Taro.showLoading()
+
+    getUserInfo({ accessToken, activeKey }).then(({ data }) => {
       const { percent, scoreDetail, score, rank } = data.data
 
       this.setState({
@@ -52,9 +92,17 @@ class Index extends Component {
         score,
         rank
       })
+
+      Taro.hideLoading()
+    }).catch((err) => {
+      Taro.hideLoading()
+      Taro.atMessage({
+        message: '请求错误~~',
+        type: 'error'
+      })
+
+      console.log(err)
     })
-  }
-  click = () => {
   }
   onShareAppMessage = () => {
     return {
@@ -62,11 +110,37 @@ class Index extends Component {
       path: '/pages/rank/index?groupId=999'
     }
   }
+  shift = (data) => {
+    if (data.actived) {
+      return
+    }
+    if (!data.authed) {
+      Taro.showModal({
+        title: '提示',
+        content: `您还未授权【${PLATFORM_TYPE_NAME[data.id]}】平台的账号，点击确认前往授权！`,
+        success(res) {
+          if (res.confirm) {
+            Taro.navigateTo({
+              url: `/pages/bind-input/index?id=${data.id}`
+            })
+          }
+        }
+      })
+
+      return
+    }
+
+    this.setState({
+      activeKey: data.id
+    }, this.fetch)
+  }
   render () {
-    const { percent, rank, score, showNav } = this.state
+    const { percent, rank, scoreDetail, score, activeKey, showNav, authPlatforms } = this.state
+    
 
     return (
       <View className='page__index'>
+        <AtMessage />
         <View className="main">
           <View className="count-up-score">
             <CountUp num={score}></CountUp>
@@ -77,18 +151,28 @@ class Index extends Component {
             <Text>%</Text>
           </View>
           <Text className="rank">排名{rank}位</Text>
-          <IndexGraph />
+          <IndexGraph data={scoreDetail} />
         </View>
         <View className="foot">
           { showNav && <CoverView className="fixed-nav">
             <CoverImage src={FixedNavCover} className="fixed-nav-bg" />
             <CoverView className="fixed-nav-content">
-              <CoverView className="nav-text actived">综合</CoverView>
-              <CoverView className="nav-text">微博</CoverView>
-              <CoverView className="nav-text">贴吧</CoverView>
-              <CoverView className="nav-text">虎扑</CoverView>
-              <CoverView className="nav-text">豆瓣</CoverView>
-              <CoverView className="nav-text">知乎</CoverView>
+              {
+                this.navItems.map((data) => {
+                  const platforms: any[] = authPlatforms
+                  const authed = data.id === 0 ||  platforms.indexOf(data.id) > -1
+                  const actived = activeKey === data.id
+                  const cls = cx({
+                    'nav-text': true,
+                    'actived': actived,
+                    'authed': authed
+                  })
+                  data.actived = actived
+                  data.authed = authed
+
+                  return <CoverView key={data.id} onClick={this.shift.bind(this, data)} className={cls}>{data.name}</CoverView>
+                })
+              }
             </CoverView>
             
           </CoverView> }

@@ -5,6 +5,8 @@ import { observer } from '@tarojs/mobx'
 import ActList from './components/act-list'
 import './index.less'
 
+const YCYURL = encodeURIComponent('https://m.weibo.cn/p/1008082a98366b6a3546bd16e9da0571e34b84/super_index')
+
 @observer
 class Activity extends Component {
   config: Config = {
@@ -23,12 +25,12 @@ class Activity extends Component {
         list: [
           {
             title: '感谢赞助商',
-            link: '/pages/rank-rule/index',
+            link: `/pages/webview/index?url=${encodeURIComponent('https://www.nin-jiom.com.tw/blogs/37')}`,
             content: '京都念慈菴\n我是糖，但不是一般的糖'
           },
           {
             title: '感谢赞助商',
-            link: '/pages/rank-rule/index',
+            link: `/pages/webview/index?url=${YCYURL}`,
             content: 'CCYY小透明粉丝\n杨超越签名照，海报等等'
           }
         ]
@@ -39,15 +41,10 @@ class Activity extends Component {
         desc: '20190701揭晓'
       },
       {
-        title: '盛典事宜',
+        title: '获奖名单',
         locked: true,
-        desc: '20190801揭晓'
+        desc: '20190731揭晓'
       },
-      {
-        title: '盛典事宜',
-        locked: true,
-        desc: '20190822揭晓'
-      }
     ]
   }
   render () {
