@@ -1,13 +1,11 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
-import { observer } from '@tarojs/mobx'
 import ActList from './components/act-list'
 import './index.less'
 
 const YCYURL = encodeURIComponent('https://m.weibo.cn/p/1008082a98366b6a3546bd16e9da0571e34b84/super_index')
 
-@observer
 class Activity extends Component {
   config: Config = {
     navigationBarTitleText: '盛典',

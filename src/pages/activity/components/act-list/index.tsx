@@ -1,6 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, ScrollView, Text, Image } from '@tarojs/components'
-import { observer } from '@tarojs/mobx'
 import cx from 'classnames'
 
 import './index.less'
@@ -24,7 +23,6 @@ interface ActList {
     }
 }
 
-@observer
 class ActList extends Component {
     static defaultProps = {
         list: [],

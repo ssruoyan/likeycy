@@ -1,7 +1,6 @@
 import { ComponentType } from "react";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { View, Image, Button, Text } from "@tarojs/components";
-import { observer } from "@tarojs/mobx";
 import { PLATFORM_TYPE, PLATFORM_TYPE_NAME } from "../../const/index";
 import { AtMessage } from "taro-ui";
 import { getAuthPlatform } from "../../utils/index";
@@ -19,7 +18,6 @@ const PLATFORM_TYPE_COVER = {
   [PLATFORM_TYPE.DOUBAN]: 'https://image.ff2333.com/ycy/douban.png',
 }
 
-@observer
 class ThirdAccoundBind extends Component {
   config: Config = {
     navigationBarTitleText: "绑定账号"

@@ -1,11 +1,9 @@
 import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Image, Text } from '@tarojs/components'
-import { observer } from '@tarojs/mobx'
 
 import './index.less'
 
-@observer
 class RankRule extends Component {
   config: Config = {
     navigationBarTitleText: '关于榜单'

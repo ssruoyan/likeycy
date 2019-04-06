@@ -2,7 +2,6 @@ import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text, Image, ScrollView } from '@tarojs/components'
 import cx from 'classnames'
-import { observer, inject } from '@tarojs/mobx'
 import RankCell from '../../components/rank-cell'
 import { AtActionSheet, AtActionSheetItem } from 'taro-ui' 
 import { RANK_TYPE, PLATFORM_TYPE, RANK_TYPE_NAME, PLATFORM_TYPE_NAME } from '../../const/index'
@@ -11,7 +10,6 @@ import { getAuthPlatform } from '../../utils/index'
 
 import 'taro-ui/dist/style/index.scss'
 import './index.less'
-@observer
 class Rank extends Component {
   state = {
     ranks: [{

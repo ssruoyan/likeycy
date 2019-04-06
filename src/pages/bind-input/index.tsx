@@ -2,7 +2,6 @@ import { ComponentType } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input, Text } from '@tarojs/components'
 import { AtMessage, AtButton } from 'taro-ui'
-import { observer } from '@tarojs/mobx'
 import { PLATFORM_TYPE_NAME } from '../../const/index'
 import { saveAuthPlatform } from '../../utils/index'
 
@@ -10,7 +9,6 @@ import 'taro-ui/dist/style/components/message.scss'
 import 'taro-ui/dist/style/components/button.scss'
 import './index.less'
 
-@observer
 class ThirdAccoundInput extends Component {
   config: Config = {
     navigationBarTitleText: '绑定账号'
